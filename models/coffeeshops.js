@@ -30,6 +30,10 @@ const CoffeeshopSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Review",
   },
+  website: {
+    type: String,
+    required: false,
+  },
 });
 
 const Coffeeshop = mongoose.model("Coffeeshop".CoffeeshopSchema);

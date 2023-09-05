@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+console.log(process.env);
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejs = require("ejs");
@@ -8,6 +10,17 @@ const path = require("path");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const userRoutes = require("./routes/users");
+
+const dbUrl = process.env.DB_URL;
+mongoose
+  .connect(dbUrl)
+  .then(() => {
+    console.log("Mongo Connection Open");
+  })
+  .catch((err) => {
+    console.log("Mongo Error");
+    console.log(err);
+  });
 
 // app.use("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -21,5 +34,5 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}`));
