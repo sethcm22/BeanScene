@@ -16,25 +16,25 @@ const CoffeeshopSchema = new Schema({
   images: [ImageSchema],
   price: {
     type: Number,
-    required: true,
+    required: false,
   },
   description: {
     type: String,
     required: true,
   },
-  submittedBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  reviews: {
-    type: Schema.Types.ObjectId,
-    ref: "Review",
-  },
-  website: {
-    type: String,
-    required: false,
-  },
+  // submittedBy: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  // },
+  // reviews: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Review",
+  // },
+  // website: {
+  //   type: String,
+  //   required: false,
+  // },
 });
 
-const Coffeeshop = mongoose.model("Coffeeshop".CoffeeshopSchema);
+const Coffeeshop = mongoose.model("Coffeeshop", CoffeeshopSchema);
 module.exports = Coffeeshop;
