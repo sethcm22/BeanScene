@@ -15,12 +15,12 @@ const CoffeeshopSchema = new Schema({
   },
   images: [ImageSchema],
   price: {
-    type: Number,
+    type: String,
     required: false,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   // submittedBy: {
   //   type: Schema.Types.ObjectId,

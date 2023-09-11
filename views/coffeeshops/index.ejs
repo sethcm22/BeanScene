@@ -9,7 +9,7 @@
     <h1>Coffee Shop Index</h1>
     <ul>
       <% for(shop of coffeeshops){ %>
-      <li><%=shop.name %></li>
+      <li><a href="/coffeeshops/<%=shop._id %>"><%=shop.name %></a></li>
       <% } %>
     </ul>
     <a href="/coffeeshops/create">Submit a new Coffeeshop</a>

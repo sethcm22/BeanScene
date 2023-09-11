@@ -10,7 +10,14 @@ module.exports.createForm = (req, res) => {
 
 module.exports.createSubmit = async (req, res) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
+  console.log(coffeeshop);
+  console.log(coffeeshop._id);
   await coffeeshop.save();
-  res.redirect("/coffeeshops");
-  // res.redirect(`./coffeeshops/${coffeeshop._id}`);
+  res.redirect(`./coffeeshops/${coffeeshop._id}`);
+};
+
+module.exports.show = async (req, res) => {
+  const { id } = req.params;
+  const coffeeshop = await Coffeeshop.findById(id);
+  res.render("coffeeshops/show", { coffeeshop });
 };
