@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const users = require("../controllers/users");
+const usersController = require("../controllers/users");
 
-router.route("/register").get(users.registerForm);
+router.route("/register").get(usersController.registerForm);
 
-router.route("/login").get(users.loginForm);
+router.route("/login").get(usersController.loginForm);
 
 // router.route("/logout").get(users.logout);
 

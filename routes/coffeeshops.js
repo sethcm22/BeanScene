@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const coffeeshops = require("../controllers/coffeeshops");
+const coffeeshopsController = require("../controllers/coffeeshops");
 
-router.route("/").get(coffeeshops.index);
+router
+  .route("/")
+  .get(coffeeshopsController.index)
+  .post(coffeeshopsController.createSubmit);
+
+router.route("/create").get(coffeeshopsController.createForm);
 
 module.exports = router;
