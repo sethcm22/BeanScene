@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Coffeeshop</title>
+  </head>
+  <body>
+    <h1>Edit a Coffeeshop!</h1>
+
+    <form action="/coffeeshops/<%=coffeeshop._id%>/?_method=PUT" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          placeholder="Name"
+          name="coffeeshop[name]"
+          id="name"
+          value="<%=coffeeshop.name %>"
+        />
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <input
+          type="text"
+          placeholder="Location"
+          name="coffeeshop[location]"
+          id="location"
+          value="<%=coffeeshop.location %>"
+        />
+      </div>
+      <div>
+        <% for(let p of prices) {%>
+            <label for="<%=p%>"><%=p%></label>
+            <input type="radio" id="<%=p%>" <%=coffeeshop.price === p ? "checked": ""%> name="coffeeshop[price]" value="<%=p%>">
+
+      <% } %>
+      <div>
+        <label for="description">Description</label>
+        <textarea
+          name="coffeeshop[description]"
+          id="description"
+          cols="30"
+          rows="5"
+          
+        ><%=coffeeshop.description%></textarea>
+      </div>
+
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

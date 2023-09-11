@@ -22,6 +22,10 @@ const CoffeeshopSchema = new Schema({
     type: String,
     required: false,
   },
+  location: {
+    type: String,
+    required: false,
+  },
   // submittedBy: {
   //   type: Schema.Types.ObjectId,
   //   ref: "User",

@@ -27,6 +27,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 app.use("/coffeeshops", coffeeshopRoutes);
 app.use("/users", userRoutes);

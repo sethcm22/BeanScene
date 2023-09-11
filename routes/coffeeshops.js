@@ -9,6 +9,12 @@ router
 
 router.route("/create").get(coffeeshopsController.createForm);
 
-router.route("/:id").get(coffeeshopsController.show);
+router
+  .route("/:id")
+  .get(coffeeshopsController.showCoffeeshop)
+  .put(coffeeshopsController.submitEdit)
+  .delete(coffeeshopsController.deleteCoffeeshop);
+
+router.route("/:id/edit").get(coffeeshopsController.editCoffeeshop);
 
 module.exports = router;
