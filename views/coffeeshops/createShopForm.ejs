@@ -2,7 +2,7 @@
 
 <h1>Add a new Coffeeshop!</h1>
 
-<form action="/coffeeshops" method="POST">
+<!-- <form action="/coffeeshops" method="POST">
   <div>
     <label for="name">Name</label>
     <input type="text" placeholder="Name" name="coffeeshop[name]" id="name" />
@@ -37,6 +37,76 @@
       rows="5"
     ></textarea>
   </div>
+  <div>
+    <label for="image">Image URL</label>
+    <input type="text" name="image" id="image" />
+  </div>
 
   <button class="btn btn-primary">Submit</button>
+</form> -->
+
+<form action="/coffeeshops" method="POST" class="row g-3">
+  <div class="col-md-6">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="coffeeshop[name]"
+      placeholder="Name"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="location" class="form-label">Location</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      name="coffeeshop[location]"
+      placeholder="Location"
+    />
+  </div>
+  <div class="col-12">
+    <label class="form-label" for="description">Description</label>
+    <textarea
+      class="form-control"
+      name="coffeeshop[description]"
+      id="description"
+      cols="50"
+      rows="5"
+    ></textarea>
+  </div>
+  <div class="col-12">
+    <div>
+      <label for="one">1</label>
+      <input type="radio" id="one" name="coffeeshop[price]" value="1" />
+      <label for="two">2</label>
+      <input type="radio" id="two" name="coffeeshop[price]" value="2" />
+      <label for="three">3</label>
+      <input
+        type="radio"
+        checked
+        id="three"
+        name="coffeeshop[price]"
+        value="3"
+      />
+      <label for="four">4</label>
+      <input type="radio" id="four" name="coffeeshop[price]" value="4" />
+      <label for="five">5</label>
+      <input type="radio" id="five" name="coffeeshop[price]" value="5" />
+    </div>
+  </div>
+  <div class="col-12">
+    <label class="form-label" for="image">Image URL</label>
+    <input
+      class="form-control"
+      type="text"
+      id="image"
+      name="coffeeshop[images]"
+      placeholder="Image URL"
+    />
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>

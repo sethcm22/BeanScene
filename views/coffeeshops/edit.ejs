@@ -1,7 +1,7 @@
 <% layout("layouts/boilerplate") -%>
-    <h1>Edit a Coffeeshop!</h1>
+<h1>Edit a Coffeeshop!</h1>
 
-    <form action="/coffeeshops/<%=coffeeshop._id%>/?_method=PUT" method="POST">
+<!-- <form action="/coffeeshops/<%=coffeeshop._id%>/?_method=PUT" method="POST">
       <div>
         <label for="name">Name</label>
         <input
@@ -40,4 +40,65 @@
       </div>
 
       <button>Submit</button>
-    </form>
+    </form> -->
+
+<form
+  action="/coffeeshops/<%=coffeeshop._id %>?_method=PUT"
+  method="POST"
+  class="row g-3"
+>
+  <div class="col-md-6">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="coffeeshop[name]"
+      placeholder="Name"
+      value="<%=coffeeshop.name %>"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="location" class="form-label">Location</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      name="coffeeshop[location]"
+      placeholder="Location"
+      value="<%=coffeeshop.location %>"
+    />
+  </div>
+  <div class="col-12">
+    <label class="form-label" for="description">Description</label>
+    <textarea
+      class="form-control"
+      name="coffeeshop[description]"
+      id="description"
+      cols="50"
+      rows="5"
+    >
+<%=coffeeshop.description %></textarea
+    >
+  </div>
+  <div class="col-12">
+    <% for(let p of prices) {%>
+      <label for="<%=p%>"><%=p%></label>
+      <input type="radio" id="<%=p%>" <%=coffeeshop.price === p ? "checked": ""%> name="coffeeshop[price]" value="<%=p%>">
+
+<% } %>
+  <div class="col-12">
+    <label class="form-label" for="image">Image URL</label>
+    <input
+      class="form-control"
+      type="text"
+      id="image"
+      name="coffeeshop[images]"
+      placeholder="Image URL"
+      value="<%=coffeeshop.images%>"
+    />
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
