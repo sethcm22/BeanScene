@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejs = require("ejs");
+const ejsMate = require("ejs-mate");
 const passport = require("passport");
 const path = require("path");
 
@@ -21,6 +22,8 @@ mongoose
     console.log("Mongo Error");
     console.log(err);
   });
+
+app.engine("ejs", ejsMate);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

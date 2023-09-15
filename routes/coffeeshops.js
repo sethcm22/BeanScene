@@ -5,16 +5,16 @@ const coffeeshopsController = require("../controllers/coffeeshops");
 router
   .route("/")
   .get(coffeeshopsController.index)
-  .post(coffeeshopsController.createSubmit);
+  .post(coffeeshopsController.submitCreateForm);
 
-router.route("/create").get(coffeeshopsController.createForm);
+router.route("/create").get(coffeeshopsController.renderCreateForm);
 
 router
   .route("/:id")
   .get(coffeeshopsController.showCoffeeshop)
-  .put(coffeeshopsController.submitEdit)
+  .put(coffeeshopsController.submitEditForm)
   .delete(coffeeshopsController.deleteCoffeeshop);
 
-router.route("/:id/edit").get(coffeeshopsController.editCoffeeshop);
+router.route("/:id/edit").get(coffeeshopsController.renderEditCoffeeshop);
 
 module.exports = router;

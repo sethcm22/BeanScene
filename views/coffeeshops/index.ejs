@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffee Shop Index</title>
-  </head>
-  <body>
-    <h1>Coffee Shop Index</h1>
-    <ul>
-      <% for(shop of coffeeshops){ %>
-      <li><a href="/coffeeshops/<%=shop._id %>"><%=shop.name %></a></li>
-      <% } %>
-    </ul>
-    <a href="/coffeeshops/create">Submit a new Coffeeshop</a>
-  </body>
-</html>
+<% layout("layouts/boilerplate") -%>
+<div class="card map" style="height: 10%">MAP</div>
+<div
+  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1 overflow-auto"
+  style="height: 45%"
+>
+  <% for(shop of coffeeshops){ %>
+  <div class="col">
+    <div class="container mt-3 mb-1">
+      <div class="card mb" style="width: 100%">
+        <img class="card-img-top" src="<%=shop.images %>" alt="" />
+        <div class="card-body">
+          <a class="card-title" href="/coffeeshops/<%=shop._id %>"
+            ><%=shop.name %></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>

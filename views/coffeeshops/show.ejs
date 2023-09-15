@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= coffeeshop.name %></title>
-  </head>
+<% layout("layouts/boilerplate") -%>
 
-  <body>
-    <h1><%= coffeeshop.name %></h1>
-    <h2><%= coffeeshop.location %></h2>
-    <p><%= coffeeshop.description %></p>
-    <a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
-    <form
-      action="/coffeeshops/<%=coffeeshop._id%>?_method=DELETE"
-      method="POST"
-    >
-      <a href="/coffeeshops">Back to Index</a>
-      <button>DELETE</button>
-    </form>
-  </body>
-</html>
+<h1><%= coffeeshop.name %></h1>
+<h2><%= coffeeshop.location %></h2>
+<p><%= coffeeshop.description %></p>
+<img style="width: 25%" src="<%=coffeeshop.images%>" alt="" />
+<a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
+<form action="/coffeeshops/<%=coffeeshop._id%>?_method=DELETE" method="POST">
+  <a href="/coffeeshops">Back to Index</a>
+  <button class="btn btn-danger">DELETE</button>
+</form>

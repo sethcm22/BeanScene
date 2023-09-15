@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Coffeeshop</title>
-  </head>
-  <body>
+<% layout("layouts/boilerplate") -%>
     <h1>Edit a Coffeeshop!</h1>
 
     <form action="/coffeeshops/<%=coffeeshop._id%>/?_method=PUT" method="POST">
@@ -48,5 +41,3 @@
 
       <button>Submit</button>
     </form>
-  </body>
-</html>
