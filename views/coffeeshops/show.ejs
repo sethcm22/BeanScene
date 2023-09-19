@@ -5,6 +5,34 @@
 <p><%= coffeeshop.description %></p>
 <img style="width: 25%" src="<%=coffeeshop.images%>" alt="" />
 <a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
+
+<h2>Leave a Review!</h2>
+<form action="/coffeeshops/<%=coffeeshop._id%>/reviews" method="POST">
+  <div>
+    <div>
+      <label for="one">1</label>
+      <input type="radio" id="one" name="review[price]" value="1" />
+      <label for="two">2</label>
+      <input type="radio" id="two" name="review[price]" value="2" />
+      <label for="three">3</label>
+      <input type="radio" checked id="three" name="review[price]" value="3" />
+      <label for="four">4</label>
+      <input type="radio" id="four" name="review[price]" value="4" />
+      <label for="five">5</label>
+      <input type="radio" id="five" name="review[price]" value="5" />
+    </div>
+    <label for="reviewText" class="form-label">Review Text</label>
+    <textarea
+      name="review[text]"
+      id="reviewText"
+      class="form-control"
+      cols="1"
+      rows="5"
+    ></textarea>
+  </div>
+  <button class="btn btn-primary">Submit Review</button>
+</form>
+
 <form action="/coffeeshops/<%=coffeeshop._id%>?_method=DELETE" method="POST">
   <a href="/coffeeshops">Back to Index</a>
   <button class="btn btn-danger">DELETE</button>

@@ -20,7 +20,9 @@ module.exports.submitCreateForm = async (req, res) => {
 
 module.exports.showCoffeeshop = async (req, res) => {
   const { id } = req.params;
-  const coffeeshop = await Coffeeshop.findById(id);
+  const coffeeshop = await Coffeeshop.findById(id).populate({
+    path: "reviews",
+  });
   res.render("coffeeshops/show", { coffeeshop });
 };
 

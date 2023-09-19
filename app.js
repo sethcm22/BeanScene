@@ -11,6 +11,7 @@ const path = require("path");
 const ExpressError = require("./utils/ExpressError");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
+const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 
 const dbUrl = process.env.DB_URL;
@@ -35,13 +36,14 @@ app.use(methodOverride("_method"));
 
 app.use("/coffeeshops", coffeeshopRoutes);
 app.use("/users", userRoutes);
+app.use("/coffeeshops/:id/reviews", reviewRoutes);
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.all("*", (req, res, next) => {
-  next(new ExpressError("Page Not Found", 404));
-});
+// app.all("*", (req, res, next) => {
+//   next(new ExpressError("Page Not Found", 404));
+// });
 app.use((err, req, res, next) => {
   const { status = 500 } = err;
   if (!err.message) err.message = "Something Went Wrong";
