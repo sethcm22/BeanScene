@@ -2,12 +2,21 @@ body {
   height: 100vh;
   text-align: center;
   font-size: 2rem;
-  background-image: url("https://images.unsplash.com/photo-1515388293731-e768737d41e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80");
-  background-position: center;
+  color: antiquewhite;
+  background: radial-gradient(transparent, black),
+    url("https://images.unsplash.com/photo-1515388293731-e768737d41e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80");
+  background-position: center right, center right;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
 }
 body p {
   margin: 0 5px;
+}
+
+@media (width < 950px) {
+  body {
+    background-position: center right, center right -100px;
+    background-attachment: local;
+  }
 }

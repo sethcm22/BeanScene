@@ -8,6 +8,7 @@ const ejs = require("ejs");
 const ejsMate = require("ejs-mate");
 const passport = require("passport");
 const path = require("path");
+const ExpressError = require("./utils/ExpressError");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const userRoutes = require("./routes/users");
@@ -36,6 +37,16 @@ app.use("/coffeeshops", coffeeshopRoutes);
 app.use("/users", userRoutes);
 app.get("/", (req, res) => {
   res.render("home");
+});
+
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
+app.use((err, req, res, next) => {
+  const { status = 500 } = err;
+  if (!err.message) err.message = "Something Went Wrong";
+  res.status(status).render("./error", { err });
+  console.log(err);
 });
 
 const port = process.env.PORT || 3000;
