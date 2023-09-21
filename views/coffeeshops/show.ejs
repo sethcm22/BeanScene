@@ -6,20 +6,33 @@
 <img style="width: 25%" src="<%=coffeeshop.images%>" alt="" />
 <a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
 
+<% for(review of coffeeshop.reviews){ %>
+<p><%= review.text%></p>
+
+<% } %>
+
 <h2>Leave a Review!</h2>
-<form action="/coffeeshops/<%=coffeeshop._id%>/reviews" method="POST">
+<form
+  action="/coffeeshops/<%=coffeeshop._id%>/reviews"
+  method="POST"
+  novalidate
+  class="needs-validation"
+>
   <div>
     <div>
-      <label for="one">1</label>
-      <input type="radio" id="one" name="review[price]" value="1" />
-      <label for="two">2</label>
-      <input type="radio" id="two" name="review[price]" value="2" />
-      <label for="three">3</label>
-      <input type="radio" checked id="three" name="review[price]" value="3" />
-      <label for="four">4</label>
-      <input type="radio" id="four" name="review[price]" value="4" />
-      <label for="five">5</label>
-      <input type="radio" id="five" name="review[price]" value="5" />
+      <fieldset>
+        <legend>Price</legend>
+        <label for="one">1</label>
+        <input type="radio" id="one" name="review[price]" value="1" />
+        <label for="two">2</label>
+        <input type="radio" id="two" name="review[price]" value="2" />
+        <label for="three">3</label>
+        <input type="radio" checked id="three" name="review[price]" value="3" />
+        <label for="four">4</label>
+        <input type="radio" id="four" name="review[price]" value="4" />
+        <label for="five">5</label>
+        <input type="radio" id="five" name="review[price]" value="5" />
+      </fieldset>
     </div>
     <label for="reviewText" class="form-label">Review Text</label>
     <textarea
@@ -28,6 +41,7 @@
       class="form-control"
       cols="1"
       rows="5"
+      required
     ></textarea>
   </div>
   <button class="btn btn-primary">Submit Review</button>
