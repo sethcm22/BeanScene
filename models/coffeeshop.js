@@ -45,5 +45,11 @@ const CoffeeshopSchema = new Schema({
   // },
 });
 
+CoffeeshopSchema.post("findOneAndDelete", async function (doc) {
+  if (doc) {
+    await Review.deleteMany({ _id: { $in: doc.reviews } });
+  }
+});
+
 const Coffeeshop = mongoose.model("Coffeeshop", CoffeeshopSchema);
 module.exports = Coffeeshop;
