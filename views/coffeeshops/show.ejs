@@ -8,6 +8,13 @@
 
 <% for(review of coffeeshop.reviews){ %>
 <p><%= review.text%></p>
+<p><%=review._id %></p>
+<form
+  action="/coffeeshops/<%=coffeeshop._id%>/reviews/<%=review._id%>?_method=DELETE"
+  method="POST"
+>
+  <button class="btn btn-danger">Delete Review</button>
+</form>
 
 <% } %>
 

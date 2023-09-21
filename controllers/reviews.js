@@ -13,9 +13,9 @@ module.exports.createReview = async (req, res) => {
 
 module.exports.deleteReview = async (req, res) => {
   const { id, reviewId } = req.params;
-  const coffeeshop = await Coffeeshop.findById(id, {
+  const coffeeshop = await Coffeeshop.findByIdAndUpdate(id, {
     $pull: { reviews: reviewId },
   });
   const review = await Review.findByIdAndDelete(reviewId);
-  res.redirect(`coffeeshops/${id}`);
+  res.redirect(`/coffeeshops/${id}`);
 };
