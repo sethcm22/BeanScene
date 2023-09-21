@@ -1,20 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const coffeeshopsController = require("../controllers/coffeeshops");
+const catchAsync = require("../utils/catchAsync");
 
 router
   .route("/")
-  .get(coffeeshopsController.index)
-  .post(coffeeshopsController.submitCreateForm);
+  .get(catchAsync(coffeeshopsController.index))
+  .post(catchAsync(coffeeshopsController.submitCreateForm));
 
 router.route("/create").get(coffeeshopsController.renderCreateForm);
 
 router
   .route("/:id")
-  .get(coffeeshopsController.showCoffeeshop)
-  .put(coffeeshopsController.submitEditForm)
-  .delete(coffeeshopsController.deleteCoffeeshop);
+  .get(catchAsync(coffeeshopsController.showCoffeeshop))
+  .put(catchAsync(coffeeshopsController.submitEditForm))
+  .delete(catchAsync(coffeeshopsController.deleteCoffeeshop));
 
-router.route("/:id/edit").get(coffeeshopsController.renderEditCoffeeshop);
+router
+  .route("/:id/edit")
+  .get(catchAsync(coffeeshopsController.renderEditCoffeeshop));
 
 module.exports = router;

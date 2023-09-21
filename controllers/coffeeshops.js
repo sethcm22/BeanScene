@@ -10,7 +10,7 @@ module.exports.renderCreateForm = (req, res) => {
   res.render("coffeeshops/createShopForm", prices);
 };
 
-module.exports.submitCreateForm = async (req, res) => {
+module.exports.submitCreateForm = async (req, res, next) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
   console.log(coffeeshop);
   console.log(coffeeshop._id);

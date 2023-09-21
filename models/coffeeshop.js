@@ -23,7 +23,7 @@ const CoffeeshopSchema = new Schema({
   },
   description: {
     type: String,
-    required: false,
+    required: true,
   },
   location: {
     type: String,
