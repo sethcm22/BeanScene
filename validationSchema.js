@@ -20,3 +20,21 @@ module.exports.validateCoffeeshop = (req, res, next) => {
     next();
   }
 };
+
+const reviewSchema = Joi.object({
+  review: Joi.object({
+    text: Joi.string().required(),
+    price: Joi.number().required().min(1).max(5),
+  }).required(),
+});
+
+module.exports.validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
+  if (error) {
+    console.log(error);
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};

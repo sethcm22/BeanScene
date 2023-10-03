@@ -7,8 +7,8 @@
 <a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
 
 <% for(review of coffeeshop.reviews){ %>
-<p><%= review.text%></p>
-<p><%=review._id %></p>
+<p>Review: <%= review.text%></p>
+<p>Price: <%=review.price %></p>
 <form
   action="/coffeeshops/<%=coffeeshop._id%>/reviews/<%=review._id%>?_method=DELETE"
   method="POST"
