@@ -1,4 +1,6 @@
 const Coffeeshop = require("../models/coffeeshop");
+const Joi = require("joi");
+const ExpressError = require("../utils/ExpressError");
 
 module.exports.index = async (req, res) => {
   const coffeeshops = await Coffeeshop.find({}).lean();
@@ -13,8 +15,8 @@ module.exports.renderCreateForm = (req, res) => {
 
 module.exports.submitCreateForm = async (req, res, next) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
-  console.log(coffeeshop);
-  console.log(coffeeshop._id);
+  // console.log(coffeeshop);
+  // console.log(coffeeshop._id);
   await coffeeshop.save();
   res.redirect(`./coffeeshops/${coffeeshop._id}`);
 };
