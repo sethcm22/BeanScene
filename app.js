@@ -10,6 +10,7 @@ const passport = require("passport");
 const path = require("path");
 const ExpressError = require("./utils/ExpressError");
 const Joi = require("joi");
+const session = require("express-session");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const reviewRoutes = require("./routes/reviews");
@@ -34,6 +35,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+
+const sessionConfig = {
+  secret: "superSecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(session(sessionConfig));
 
 app.use("/coffeeshops", coffeeshopRoutes);
 app.use("/users", userRoutes);

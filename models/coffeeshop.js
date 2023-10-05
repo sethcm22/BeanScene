@@ -45,6 +45,7 @@ const CoffeeshopSchema = new Schema({
   // },
 });
 
+//      Mongoose Query middleware. Needs to be post() so query runs first.
 CoffeeshopSchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
     await Review.deleteMany({ _id: { $in: doc.reviews } });
