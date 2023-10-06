@@ -18,6 +18,7 @@ module.exports.submitCreateForm = async (req, res, next) => {
   // console.log(coffeeshop);
   // console.log(coffeeshop._id);
   await coffeeshop.save();
+  req.flash("success", "Made a new coffeeshop");
   res.redirect(`./coffeeshops/${coffeeshop._id}`);
 };
 
@@ -26,12 +27,20 @@ module.exports.showCoffeeshop = async (req, res) => {
   const coffeeshop = await Coffeeshop.findById(id).populate({
     path: "reviews",
   });
+  if (!coffeeshop) {
+    req.flash("error", "Sorry we couldn't find that Coffeeshop");
+    return res.redirect("/coffeeshops");
+  }
   res.render("coffeeshops/show", { coffeeshop });
 };
 
 module.exports.renderEditCoffeeshop = async (req, res) => {
   const { id } = req.params;
   const coffeeshop = await Coffeeshop.findById(id);
+  if (!coffeeshop) {
+    req.flash("error", "Sorry we couldn't find that Coffeeshop");
+    return res.redirect("/coffeeshops");
+  }
   res.render("coffeeshops/edit", { coffeeshop, prices });
 };
 
@@ -47,5 +56,6 @@ module.exports.submitEditForm = async (req, res) => {
 module.exports.deleteCoffeeshop = async (req, res) => {
   const { id } = req.params;
   const coffeeshop = await Coffeeshop.findByIdAndDelete(id);
+  req.flash("success", "Successfully deleted a Coffeeshop.");
   res.redirect("/coffeeshops");
 };

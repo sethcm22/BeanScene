@@ -8,6 +8,7 @@ module.exports.createReview = async (req, res) => {
   coffeeshop.reviews.push(review);
   await review.save();
   await coffeeshop.save();
+  req.flash("success", "Successfully created a review.");
   res.redirect(`/coffeeshops/${id}`);
 };
 
@@ -17,5 +18,6 @@ module.exports.deleteReview = async (req, res) => {
     $pull: { reviews: reviewId },
   });
   const review = await Review.findByIdAndDelete(reviewId);
+  req.flash("success", "Successfully deleted a review.");
   res.redirect(`/coffeeshops/${id}`);
 };

@@ -11,6 +11,7 @@ const path = require("path");
 const ExpressError = require("./utils/ExpressError");
 const Joi = require("joi");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const reviewRoutes = require("./routes/reviews");
@@ -46,7 +47,14 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
+app.use(flash());
 app.use(session(sessionConfig));
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use("/coffeeshops", coffeeshopRoutes);
 app.use("/users", userRoutes);
