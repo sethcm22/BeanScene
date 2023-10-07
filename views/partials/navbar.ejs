@@ -27,13 +27,15 @@
             >Add Coffeeshop</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
-        </li>
       </ul>
+    </div>
+    <div class="navbar-nav ml-auto">
+      <% if(!currentUser) { %>
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-link">Register</a>
+      <% } else{ %>
+      <a href="/logout" class="nav-link">Logout</a>
+      <% } %>
     </div>
   </div>
 </nav>

@@ -20,10 +20,10 @@ router
   .route("/:id")
   .get(catchAsync(coffeeshopsController.showCoffeeshop))
   .put(validateCoffeeshop, catchAsync(coffeeshopsController.submitEditForm))
-  .delete(catchAsync(coffeeshopsController.deleteCoffeeshop));
+  .delete(isLoggedIn, catchAsync(coffeeshopsController.deleteCoffeeshop));
 
 router
   .route("/:id/edit")
-  .get(catchAsync(coffeeshopsController.renderEditCoffeeshop));
+  .get(isLoggedIn, catchAsync(coffeeshopsController.renderEditCoffeeshop));
 
 module.exports = router;

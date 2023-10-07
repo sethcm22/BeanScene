@@ -3,12 +3,18 @@
 <h1><%= coffeeshop.name %></h1>
 <h2><%= coffeeshop.location %></h2>
 <p><%= coffeeshop.description %></p>
-<img style="width: 25%" src="<%=coffeeshop.images%>" alt="" />
+<p>Submitted By: <%= coffeeshop.submittedBy.username %></p>
+<img
+  style="width: 25%"
+  src="<%=coffeeshop.images%>"
+  alt="<%=coffeeshop.images %>"
+/>
 <a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
 
 <% for(review of coffeeshop.reviews){ %>
 <p>Review: <%= review.text%></p>
 <p>Price: <%=review.price %></p>
+
 <form
   action="/coffeeshops/<%=coffeeshop._id%>/reviews/<%=review._id%>?_method=DELETE"
   method="POST"

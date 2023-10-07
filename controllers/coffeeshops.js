@@ -16,8 +16,7 @@ module.exports.renderCreateForm = (req, res) => {
 
 module.exports.submitCreateForm = async (req, res, next) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
-  // console.log(coffeeshop);
-  // console.log(coffeeshop._id);
+  coffeeshop.submittedBy = req.user._id;
   await coffeeshop.save();
   req.flash("success", "Made a new coffeeshop");
   res.redirect(`./coffeeshops/${coffeeshop._id}`);
@@ -25,9 +24,9 @@ module.exports.submitCreateForm = async (req, res, next) => {
 
 module.exports.showCoffeeshop = async (req, res) => {
   const { id } = req.params;
-  const coffeeshop = await Coffeeshop.findById(id).populate({
-    path: "reviews",
-  });
+  const coffeeshop = await Coffeeshop.findById(id)
+    .populate({ path: "reviews" })
+    .populate({ path: "submittedBy" });
   if (!coffeeshop) {
     req.flash("error", "Sorry we couldn't find that Coffeeshop");
     return res.redirect("/coffeeshops");

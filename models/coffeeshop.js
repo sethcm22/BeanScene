@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review");
+const User = require("./user");
 
-const ImageSchema = new Schema({
-  url: String,
-  filename: String,
-});
+// const ImageSchema = new Schema({
+//   url: String,
+//   filename: String,
+// });
 
 // const options = { toJSON: { virtuals: true } };
 
@@ -29,10 +30,10 @@ const CoffeeshopSchema = new Schema({
     type: String,
     required: false,
   },
-  // submittedBy: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  // },
+  submittedBy: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
