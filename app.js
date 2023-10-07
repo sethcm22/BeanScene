@@ -12,6 +12,8 @@ const ExpressError = require("./utils/ExpressError");
 const Joi = require("joi");
 const session = require("express-session");
 const flash = require("connect-flash");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const reviewRoutes = require("./routes/reviews");
@@ -37,6 +39,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
+//      Express Session
 const sessionConfig = {
   secret: "superSecret",
   resave: false,
@@ -47,9 +50,17 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
-app.use(flash());
 app.use(session(sessionConfig));
 
+//      Passport Auth
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//      Connect-Flash Messages
+app.use(flash());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -57,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/coffeeshops", coffeeshopRoutes);
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 app.use("/coffeeshops/:id/reviews", reviewRoutes);
 app.get("/", (req, res) => {
   res.render("home");
