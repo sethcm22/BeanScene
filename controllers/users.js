@@ -23,6 +23,7 @@ module.exports.submitRegister = async (req, res) => {
 };
 
 module.exports.submitLogin = async (req, res) => {
-  const { username, password } = req.body;
-  User.authenticate;
+  const { username } = req.body;
+  req.flash("success", `Welcome Back ${username}`);
+  res.redirect("./coffeeshops");
 };

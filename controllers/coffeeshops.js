@@ -1,6 +1,7 @@
 const Coffeeshop = require("../models/coffeeshop");
 const Joi = require("joi");
 const ExpressError = require("../utils/ExpressError");
+const passport = require("passport");
 
 module.exports.index = async (req, res) => {
   const coffeeshops = await Coffeeshop.find({}).lean();

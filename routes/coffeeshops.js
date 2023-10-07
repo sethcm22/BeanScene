@@ -3,13 +3,18 @@ const router = express.Router();
 const coffeeshopsController = require("../controllers/coffeeshops");
 const catchAsync = require("../utils/catchAsync");
 const { validateCoffeeshop } = require("../validationSchema");
+const { isLoggedIn } = require("../middleware");
 
 router
   .route("/")
   .get(catchAsync(coffeeshopsController.index))
-  .post(validateCoffeeshop, catchAsync(coffeeshopsController.submitCreateForm));
+  .post(
+    isLoggedIn,
+    validateCoffeeshop,
+    catchAsync(coffeeshopsController.submitCreateForm)
+  );
 
-router.route("/create").get(coffeeshopsController.renderCreateForm);
+router.route("/create").get(isLoggedIn, coffeeshopsController.renderCreateForm);
 
 router
   .route("/:id")
