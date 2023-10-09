@@ -28,7 +28,7 @@ module.exports.submitLogin = async (req, res) => {
   const { username } = req.body;
   req.flash("success", `Welcome Back ${username}`);
   const redirectUrl = res.locals.returnTo || "./coffeeshops";
-  delete req.session.returnTo;
+  // delete req.session.returnTo;
   res.redirect(redirectUrl);
 };
 

@@ -14,6 +14,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const morgan = require("morgan");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const reviewRoutes = require("./routes/reviews");
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(morgan("dev"));
 
 //      Express Session
 const sessionConfig = {

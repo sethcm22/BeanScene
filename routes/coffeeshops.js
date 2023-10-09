@@ -3,7 +3,7 @@ const router = express.Router();
 const coffeeshopsController = require("../controllers/coffeeshops");
 const catchAsync = require("../utils/catchAsync");
 const { validateCoffeeshop } = require("../validationSchema");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isOwner } = require("../middleware");
 
 router
   .route("/")
@@ -19,11 +19,23 @@ router.route("/create").get(isLoggedIn, coffeeshopsController.renderCreateForm);
 router
   .route("/:id")
   .get(catchAsync(coffeeshopsController.showCoffeeshop))
-  .put(validateCoffeeshop, catchAsync(coffeeshopsController.submitEditForm))
-  .delete(isLoggedIn, catchAsync(coffeeshopsController.deleteCoffeeshop));
+  .put(
+    validateCoffeeshop,
+    isOwner,
+    catchAsync(coffeeshopsController.submitEditForm)
+  )
+  .delete(
+    isLoggedIn,
+    isOwner,
+    catchAsync(coffeeshopsController.deleteCoffeeshop)
+  );
 
 router
   .route("/:id/edit")
-  .get(isLoggedIn, catchAsync(coffeeshopsController.renderEditCoffeeshop));
+  .get(
+    isLoggedIn,
+    isOwner,
+    catchAsync(coffeeshopsController.renderEditCoffeeshop)
+  );
 
 module.exports = router;

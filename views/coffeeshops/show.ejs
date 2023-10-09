@@ -9,7 +9,6 @@
   src="<%=coffeeshop.images%>"
   alt="<%=coffeeshop.images %>"
 />
-<a href="/coffeeshops/<%=coffeeshop._id%>/edit">Edit</a>
 
 <% for(review of coffeeshop.reviews){ %>
 <p>Review: <%= review.text%></p>
@@ -59,8 +58,12 @@
   </div>
   <button class="btn btn-primary">Submit Review</button>
 </form>
-
+<% if(currentUser && coffeeshop.submittedBy.equals(currentUser._id)) {%>
 <form action="/coffeeshops/<%=coffeeshop._id%>?_method=DELETE" method="POST">
   <a href="/coffeeshops">Back to Index</a>
   <button class="btn btn-danger">DELETE</button>
 </form>
+<form action="/coffeeshops/<%=coffeeshop._id%>/edit" method="GET">
+  <button class="btn btn-warning">Edit</button>
+</form>
+<%} %>

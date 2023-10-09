@@ -7,7 +7,7 @@ const coffeeshopSchema = Joi.object({
     price: Joi.number(),
     description: Joi.string().required(),
     location: Joi.string().required(),
-    images: Joi.string(),
+    // images: Joi.string(),
   }).required(),
 });
 
