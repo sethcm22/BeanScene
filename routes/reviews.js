@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const reviewsController = require("../controllers/reviews");
 const catchAsync = require("../utils/catchAsync");
-const { validateReview } = require("../validationSchema");
-const { isLoggedIn, isOwner } = require("../middleware");
+const { isLoggedIn, isAuthor, validateReview } = require("../middleware");
 
 router.post(
   "/",
@@ -14,8 +13,8 @@ router.post(
 
 router.delete(
   "/:reviewId",
-  isOwner,
   isLoggedIn,
+  isAuthor,
   catchAsync(reviewsController.deleteReview)
 );
 

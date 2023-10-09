@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const coffeeshopsController = require("../controllers/coffeeshops");
 const catchAsync = require("../utils/catchAsync");
-const { validateCoffeeshop } = require("../validationSchema");
-const { isLoggedIn, isOwner } = require("../middleware");
+const { isLoggedIn, isOwner, validateCoffeeshop } = require("../middleware");
 
 router
   .route("/")

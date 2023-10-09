@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const coffeeshopSchema = Joi.object({
+module.exports.coffeeshopSchema = Joi.object({
   coffeeshop: Joi.object({
     name: Joi.string().required(),
     price: Joi.number(),
@@ -10,9 +10,10 @@ const coffeeshopSchema = Joi.object({
   }).required(),
 });
 
-const reviewSchema = Joi.object({
+module.exports.reviewSchema = Joi.object({
   review: Joi.object({
     text: Joi.string().required(),
     price: Joi.number().required().min(1).max(5),
+    // author: Joi.string().required(),
   }).required(),
 });

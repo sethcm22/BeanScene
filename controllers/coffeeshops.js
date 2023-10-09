@@ -25,7 +25,7 @@ module.exports.submitCreateForm = async (req, res, next) => {
 module.exports.showCoffeeshop = async (req, res) => {
   const { id } = req.params;
   const coffeeshop = await Coffeeshop.findById(id)
-    .populate({ path: "reviews" })
+    .populate({ path: "reviews", populate: { path: "author" } })
     .populate({ path: "submittedBy" });
   if (!coffeeshop) {
     req.flash("error", "Sorry we couldn't find that Coffeeshop");
