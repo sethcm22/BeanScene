@@ -1,4 +1,5 @@
 const Coffeeshop = require("./models/coffeeshop");
+const ExpressError = require("./utils/ExpressError");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -24,4 +25,26 @@ module.exports.isOwner = async (req, res, next) => {
     return res.redirect(`/coffeeshops/${id}`);
   }
   next();
+};
+
+module.exports.validateCoffeeshop = (req, res, next) => {
+  const { error } = coffeeshopSchema.validate(req.body);
+  if (error) {
+    console.log(error);
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+module.exports.validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
+  if (error) {
+    console.log(error);
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
 };
