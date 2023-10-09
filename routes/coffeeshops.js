@@ -3,12 +3,16 @@ const router = express.Router();
 const coffeeshopsController = require("../controllers/coffeeshops");
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isOwner, validateCoffeeshop } = require("../middleware");
+const multer = require("multer");
+const { storage } = require("cloudinary");
+const upload = multer({ storage });
 
 router
   .route("/")
   .get(catchAsync(coffeeshopsController.index))
   .post(
     isLoggedIn,
+    upload.array("image"),
     validateCoffeeshop,
     catchAsync(coffeeshopsController.submitCreateForm)
   );
@@ -19,8 +23,9 @@ router
   .route("/:id")
   .get(catchAsync(coffeeshopsController.showCoffeeshop))
   .put(
-    validateCoffeeshop,
     isOwner,
+    upload.array("image"),
+    validateCoffeeshop,
     catchAsync(coffeeshopsController.submitEditForm)
   )
   .delete(
