@@ -15,9 +15,12 @@ const CoffeeshopSchema = new Schema({
     type: String,
     required: true,
   },
-  // images: {
-  //   type: String,
-  // },
+  images: [
+    {
+      url: String,
+      filename: String,
+    },
+  ],
   price: {
     type: String,
     required: false,

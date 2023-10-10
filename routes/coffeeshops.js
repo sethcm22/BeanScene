@@ -4,7 +4,7 @@ const coffeeshopsController = require("../controllers/coffeeshops");
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isOwner, validateCoffeeshop } = require("../middleware");
 const multer = require("multer");
-const { storage } = require("cloudinary");
+const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 
 router

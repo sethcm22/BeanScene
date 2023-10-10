@@ -4,13 +4,10 @@
 <h2><%= coffeeshop.location %></h2>
 <p><%= coffeeshop.description %></p>
 <p>Submitted By: <%= coffeeshop.submittedBy.username %></p>
-<img
-  style="width: 25%"
-  src="<%=coffeeshop.images%>"
-  alt="<%=coffeeshop.images %>"
-/>
 
-<% for(review of coffeeshop.reviews){ %>
+<%for( let image of coffeeshop.images) {%>
+<img style="width: 25%" src="<%=image.url%>" alt="" />
+<%} %> <% for(review of coffeeshop.reviews){ %>
 <p>Review: <%= review.text%></p>
 <p>Price: <%=review.price %></p>
 <p>Author: <%=review.author.username %></p>

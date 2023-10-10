@@ -16,6 +16,10 @@ module.exports.renderCreateForm = (req, res) => {
 
 module.exports.submitCreateForm = async (req, res, next) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
+  coffeeshop.images = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
   coffeeshop.submittedBy = req.user._id;
   await coffeeshop.save();
   req.flash("success", "Made a new coffeeshop");
