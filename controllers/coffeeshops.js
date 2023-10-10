@@ -3,6 +3,9 @@ const Joi = require("joi");
 const ExpressError = require("../utils/ExpressError");
 const passport = require("passport");
 const { cloudinary } = require("../cloudinary");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mbxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mbxToken });
 
 module.exports.index = async (req, res) => {
   const coffeeshops = await Coffeeshop.find({}).lean();
@@ -17,6 +20,10 @@ module.exports.renderCreateForm = (req, res) => {
 
 module.exports.submitCreateForm = async (req, res, next) => {
   const coffeeshop = await new Coffeeshop(req.body.coffeeshop);
+  const geoData = await geocoder
+    .forwardGeocode({ query: coffeeshop.location, limit: 1 })
+    .send();
+  coffeeshop.geometry = geoData.body.features[0].geometry;
   coffeeshop.images = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,

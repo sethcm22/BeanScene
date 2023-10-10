@@ -3,8 +3,10 @@
 <div class="col-6">
   <div id="coffeeshopCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
+      <% if(coffeeshop.images.length) {%>
       <% coffeeshop.images.forEach((image,i) => {%>
       <div class="carousel-item <%= i=== 0 ? "active":"" %>">
+        
         <img class="d-block w-100 carouselImage" src="<%=image.url%>" alt="" />
       </div>
       <%})%>
@@ -29,6 +31,10 @@
       <span class="sr-only">Next</span>
     </a>
     <%} %>
+    <%} else{%>
+      <img class="d-block w-100 carouselImage" src="https://res.cloudinary.com/dkk2u2lcr/image/upload/v1696979320/no-image-availabe_xzwlca.png" alt="" />
+
+      <%} %>
   </div>
 </div>
 

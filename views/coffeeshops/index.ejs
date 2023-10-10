@@ -9,7 +9,17 @@
   <div class="col">
     <div class="container mt-3 mb-1">
       <div class="card mb" style="width: 100%">
+        <%if (shop.images.length) {%>
         <img class="card-img-top" src="<%=shop.images[0].url %>" alt="" />
+        <%} else{%>
+
+        <img
+          class="carg-img-top"
+          src="https://res.cloudinary.com/dkk2u2lcr/image/upload/v1696979320/no-image-availabe_xzwlca.png"
+          alt=""
+        />
+
+        <%} %>
         <div class="card-body">
           <a class="card-title" href="/coffeeshops/<%=shop._id %>"
             ><%=shop.name %></a

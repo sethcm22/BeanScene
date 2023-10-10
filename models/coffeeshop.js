@@ -31,6 +31,17 @@ const CoffeeshopSchema = new Schema({
     type: String,
     required: false,
   },
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   submittedBy: {
     type: Schema.Types.ObjectId,
     ref: "User",
