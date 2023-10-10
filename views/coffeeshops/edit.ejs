@@ -56,7 +56,13 @@
   <input type="file" class="form-control" name="image" id="image" multiple />
 </div>
 <div class="col-12">
-
+  <% coffeeshop.images.forEach((image,i) =>{ %>
+    <img class="img-thumbnail" src="<%=image.thumbnail %>" alt="">
+    <div class="form-check-inline">
+      <label for="image-<%=i %>" >Delete?</label>
+      <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=image.filename %>">
+    </div>
+  <%})%>
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>

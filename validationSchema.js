@@ -8,6 +8,7 @@ module.exports.coffeeshopSchema = Joi.object({
     location: Joi.string().required(),
     // images: Joi.string(),
   }).required(),
+  deleteImages: Joi.array(),
 });
 
 module.exports.reviewSchema = Joi.object({

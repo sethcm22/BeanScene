@@ -3,24 +3,22 @@ const Schema = mongoose.Schema;
 const Review = require("./review");
 const User = require("./user");
 
-// const ImageSchema = new Schema({
-//   url: String,
-//   filename: String,
-// });
-
-// const options = { toJSON: { virtuals: true } };
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200");
+});
+const options = { toJSON: { virtuals: true } };
 
 const CoffeeshopSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  images: [
-    {
-      url: String,
-      filename: String,
-    },
-  ],
+  images: [ImageSchema],
+
   price: {
     type: String,
     required: false,

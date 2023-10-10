@@ -2,6 +2,7 @@ const Coffeeshop = require("../models/coffeeshop");
 const Joi = require("joi");
 const ExpressError = require("../utils/ExpressError");
 const passport = require("passport");
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
   const coffeeshops = await Coffeeshop.find({}).lean();
@@ -50,10 +51,22 @@ module.exports.renderEditCoffeeshop = async (req, res) => {
 
 module.exports.submitEditForm = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   const coffeeshop = await Coffeeshop.findByIdAndUpdate(id, {
     ...req.body.coffeeshop,
   });
+  const images = req.files.map((f) => ({ url: f.path, filename: f.filename }));
+  coffeeshop.images.push(...images);
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await coffeeshop.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImages } } },
+    });
+  }
   await coffeeshop.save();
+  req.flash("success", "Edit was successful.");
   res.redirect(`/coffeeshops/${coffeeshop._id}`);
 };
 

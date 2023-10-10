@@ -23,6 +23,7 @@ router
   .route("/:id")
   .get(catchAsync(coffeeshopsController.showCoffeeshop))
   .put(
+    isLoggedIn,
     isOwner,
     upload.array("image"),
     validateCoffeeshop,
