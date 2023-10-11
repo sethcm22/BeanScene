@@ -1,6 +1,7 @@
 <% layout("layouts/boilerplate") -%>
 <script>
   const mbxToken = "<%= process.env.MAPBOX_TOKEN%>";
+  const coffeeshop = <%-JSON.stringify(coffeeshop)%>;
 </script>
 
 <div class="card map" style="height: 300px; width:400px" id="map"></div>
