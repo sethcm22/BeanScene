@@ -17,6 +17,8 @@ const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const morgan = require("morgan");
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 
 const coffeeshopRoutes = require("./routes/coffeeshops");
 const reviewRoutes = require("./routes/reviews");
@@ -39,17 +41,26 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
+app.use(mongoSanitize());
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 //      Express Session
 const sessionConfig = {
+  name: "session",
   secret: "superSecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    secure: process.env.NODE_ENV !== "production" ? false : true,
+    //  Expires in 1 week.
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
