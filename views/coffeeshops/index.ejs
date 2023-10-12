@@ -1,8 +1,4 @@
 <% layout("layouts/boilerplate") -%>
-<script>
-  const mbxToken = "<%= process.env.MAPBOX_TOKEN%>";
-  const coffeeshops = {features: <%-JSON.stringify(coffeeshops) %>};
-</script>
 
 <div class="card map" style="height: 25%" id="map"></div>
 
@@ -36,4 +32,8 @@
   <% } %>
 </div>
 
-<script src="/javascripts/indexClusterMap.js"></script>
+<script defer>
+  const mbxToken = "<%= process.env.MAPBOX_TOKEN%>";
+  const coffeeshops = {features: <%-JSON.stringify(coffeeshops) %>};
+</script>
+<script src="/javascripts/indexClusterMap.js" defer></script>

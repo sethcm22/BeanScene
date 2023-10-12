@@ -8,7 +8,7 @@ const mbxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mbxToken });
 
 module.exports.index = async (req, res) => {
-  const coffeeshops = await Coffeeshop.find({}).lean();
+  const coffeeshops = await Coffeeshop.find({});
   res.render("coffeeshops/index", { coffeeshops });
 };
 

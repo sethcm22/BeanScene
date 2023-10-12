@@ -12,50 +12,57 @@ ImageSchema.virtual("thumbnail").get(function () {
 });
 const options = { toJSON: { virtuals: true } };
 
-const CoffeeshopSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  images: [ImageSchema],
-
-  price: {
-    type: String,
-    required: false,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String,
-    required: false,
-  },
-  geometry: {
-    type: {
+const CoffeeshopSchema = new Schema(
+  {
+    name: {
       type: String,
-      enum: ["Point"],
       required: true,
     },
-    coordinates: {
-      type: [Number],
+    images: [ImageSchema],
+
+    price: {
+      type: String,
+      required: false,
+    },
+    description: {
+      type: String,
       required: true,
     },
-  },
-  submittedBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  reviews: [
-    {
+    location: {
+      type: String,
+      required: false,
+    },
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    submittedBy: {
       type: Schema.Types.ObjectId,
-      ref: "Review",
+      ref: "User",
     },
-  ],
-  // website: {
-  //   type: String,
-  //   required: false,
-  // },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    // website: {
+    //   type: String,
+    //   required: false,
+    // },
+  },
+  options
+);
+
+CoffeeshopSchema.virtual("properties.popUp").get(function () {
+  return `<strong><a href="/coffeeshops/${this._id}">${this.name}</a></strong><br><span>Price/Rating: ${this.price}</span><br><span>${this.location}</span>`;
 });
 
 //      Mongoose Query middleware. Needs to be post() so query runs first.
