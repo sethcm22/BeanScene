@@ -3,7 +3,7 @@ mapboxgl.accessToken = mbxToken;
 const map = new mapboxgl.Map({
   container: "map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-  style: "mapbox://styles/mapbox/streets-v11",
+  style: "mapbox://styles/mapbox/satellite-v9",
   center: [-103.5917, 40.6699],
   zoom: 3,
 });

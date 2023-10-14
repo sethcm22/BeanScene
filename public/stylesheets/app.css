@@ -1,0 +1,31 @@
+body {
+  overflow: hidden;
+  background: rgb(64, 38, 5);
+  background: linear-gradient(
+    0deg,
+    rgba(64, 38, 5, 1) 0%,
+    rgba(250, 235, 215, 1) 100%
+  );
+}
+
+.footer {
+  background: rgba(64, 38, 5, 0.072);
+  color: antiquewhite;
+  border-top: 1px solid rgb(64, 38, 5);
+}
+
+.header {
+  /* color: rgba(64, 38, 5); */
+  color: black;
+  border-bottom: 1px solid rgb(250, 235, 215);
+  background: rgb(238, 222, 201);
+  background: linear-gradient(
+    0deg,
+    rgba(238, 222, 201, 1) 0%,
+    rgba(250, 235, 215, 1) 100%
+  );
+}
+
+.map {
+  border-radius: 10px;
+}

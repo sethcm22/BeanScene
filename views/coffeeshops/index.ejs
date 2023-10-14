@@ -1,35 +1,32 @@
 <% layout("layouts/boilerplate") -%>
+<div class="row no-gutters mx-3 my-3" style="height: 80vh">
+  <!-- <div class="col-md-3 overflow" style="height: 100%; overflow-y: scroll"> -->
+  <div
+    class="col-md-3 d-none d-md-block shopsIndex"
+    style="height: 100%; overflow-y: scroll"
+  >
+    <% for(shop of coffeeshops){ %>
+    <div class="card mb-3" style="width: 100%">
+      <%if (shop.images.length) {%>
+      <img class="card-img-top" src="<%=shop.images[0].url %>" alt="" />
+      <%} else{%>
 
-<div class="card map" style="height: 25%" id="map"></div>
+      <img
+        class="carg-img-top"
+        src="https://res.cloudinary.com/dkk2u2lcr/image/upload/v1696979320/no-image-availabe_xzwlca.png"
+        alt=""
+      />
 
-<div
-  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1 overflow-auto"
-  style="height: 85%; width: 100%"
->
-  <% for(shop of coffeeshops){ %>
-  <div class="col">
-    <div class="container mt-3 mb-1">
-      <div class="card mb" style="width: 100%">
-        <%if (shop.images.length) {%>
-        <img class="card-img-top" src="<%=shop.images[0].url %>" alt="" />
-        <%} else{%>
-
-        <img
-          class="carg-img-top"
-          src="https://res.cloudinary.com/dkk2u2lcr/image/upload/v1696979320/no-image-availabe_xzwlca.png"
-          alt=""
-        />
-
-        <%} %>
-        <div class="card-body">
-          <a class="card-title" href="/coffeeshops/<%=shop._id %>"
-            ><%=shop.name %></a
-          >
-        </div>
+      <%} %>
+      <div class="card-body">
+        <a class="card-title" href="/coffeeshops/<%=shop._id %>"
+          ><%=shop.name %></a
+        >
       </div>
     </div>
+    <% } %>
   </div>
-  <% } %>
+  <div class="map col-md-9" id="map"></div>
 </div>
 
 <script defer>
